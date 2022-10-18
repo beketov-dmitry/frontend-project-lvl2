@@ -8,7 +8,7 @@ lint:
 	npx eslint .
 install-deps:
 	npm ci
-install: install-deps
-	npx simple-git-hooks
+install:
+	npx ci
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
