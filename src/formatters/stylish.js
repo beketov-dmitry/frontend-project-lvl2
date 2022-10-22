@@ -4,14 +4,12 @@ import compareNeaste from './compare.js';
 const Spaces = (depth) => ' '.repeat(2 + 2 * depth);
 
 const stringify = (item, depth1) => {
-  let res = [];
   const iter = (value, depth) => {
     if (!_.isObject(value)) {
       return value;
     }
     const keys = Object.keys(value);
-    res = keys.map((key) => `  ${Spaces(depth + 2)}${key}: ${iter(value[key], depth + 2)}`);
-    return `{\n${res.join('\n')}\n${Spaces(depth + 1)}}`;
+    return `{\n${keys.map((key) => `  ${Spaces(depth + 2)}${key}: ${iter(value[key], depth + 2)}`).join('\n')}\n${Spaces(depth + 1)}}`;
   };
   return iter(item, depth1);
 };
