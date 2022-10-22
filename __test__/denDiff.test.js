@@ -11,7 +11,7 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const read = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 const testFiles = ['file1.json', 'file2.json', 'file3.yaml', 'file4.yaml'];
-const resFiles = ['resStylish.txt', 'resPlain.txt'];
+const resFiles = ['resStylish.txt', 'resPlain.txt', 'resJson.txt'];
 
 test('stylish', () => {
   const res = read(resFiles[0]);
@@ -22,6 +22,13 @@ test('stylish', () => {
 test('plain', () => {
   const format = 'plain';
   const res = read(resFiles[1]);
+  expect(gendiff(testFiles[0], testFiles[1], format)).toEqual(res);
+  expect(gendiff(testFiles[2], testFiles[3], format)).toEqual(res);
+});
+
+test('json', () => {
+  const format = 'json';
+  const res = read(resFiles[2]);
   expect(gendiff(testFiles[0], testFiles[1], format)).toEqual(res);
   expect(gendiff(testFiles[2], testFiles[3], format)).toEqual(res);
 });
